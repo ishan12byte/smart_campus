@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom'
 function Login() {
+  const navigate = useNavigate()
   return (
     <div>
       <h1>SMART CAMPUS</h1>
@@ -6,10 +8,14 @@ function Login() {
       <label>Email</label>
       <input type="email" />
 
+      <br/>
+
       <label>Password</label>
       <input type="password" />
 
-      <button>Login</button>
+      <br/>
+
+      <button onClick={()=>navigate("/student")}>Login</button>
       
       <p>
         Forgot Password?
