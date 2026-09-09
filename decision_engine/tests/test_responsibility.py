@@ -1,6 +1,5 @@
 from decision_engine.responsibility import determine_responsibility
 
-
 def test_user_caused():
     result = determine_responsibility(
         category="SANITATION",
