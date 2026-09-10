@@ -74,3 +74,56 @@ def find_matching_incident(
             return incident
 
     return None
+
+def attach_report_to_incident(
+    report: Report,
+    incident: Incident,
+) -> Incident:
+
+    if report.id not in incident.report_ids:
+        incident.report_ids.append(report.id)
+
+    return incident
+
+def create_incident(
+    report: Report,
+    incident_id: int,
+) -> Incident:
+
+    return Incident(
+        id=incident_id,
+        category=report.category,
+        subcategory=report.subcategory,
+        location=report.location,
+        started_at=report.reported_at,
+        status="REPORTED",
+        report_ids=[report.id],
+    )
+
+def process_report(
+    report: Report,
+    incidents: list[Incident],
+    new_incident_id: int,
+) -> tuple[Incident, bool]:
+
+    matching_incident = find_matching_incident(
+        report,
+        incidents,
+    )
+
+    if matching_incident is not None:
+        attach_report_to_incident(
+            report,
+            matching_incident,
+        )
+
+        return matching_incident, False
+
+    new_incident = create_incident(
+        report,
+        new_incident_id,
+    )
+
+    incidents.append(new_incident)
+
+    return new_incident, True
