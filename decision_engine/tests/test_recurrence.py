@@ -388,3 +388,162 @@ def test_multiple_reports_over_several_hours_create_one_occurrence():
 
     assert len(incidents) == 1
     assert incidents[0].report_ids == [1, 2, 3, 4]
+
+def test_acknowledged_incident_is_candidate():
+    incident = Incident(
+        id=201,
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        started_at=datetime(2026, 8, 31, 10, 0),
+        status="ACKNOWLEDGED",
+        report_ids=[1],
+    )
+
+    report = Report(
+        id=2,
+        description="Projector still not working",
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        reported_at=datetime(2026, 8, 31, 11, 0),
+        reporter_id=102,
+    )
+
+    assert is_candidate_match(report, incident) is True
+
+
+def test_reopened_incident_is_candidate():
+    incident = Incident(
+        id=202,
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        started_at=datetime(2026, 8, 31, 10, 0),
+        status="REOPENED",
+        report_ids=[1],
+        reopened_count=1,
+    )
+
+    report = Report(
+        id=2,
+        description="Projector failed again after reopening",
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        reported_at=datetime(2026, 8, 31, 11, 0),
+        reporter_id=102,
+    )
+
+    assert is_candidate_match(report, incident) is True
+
+
+def test_verification_pending_incident_is_candidate():
+    incident = Incident(
+        id=203,
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        started_at=datetime(2026, 8, 31, 10, 0),
+        status="VERIFICATION_PENDING",
+        report_ids=[1],
+    )
+
+    report = Report(
+        id=2,
+        description="Projector is still not fixed",
+        category="IT",
+        subcategory="PROJECTOR",
+        location="Room 203",
+        reported_at=datetime(2026, 8, 31, 11, 0),
+        reporter_id=102,
+    )
+
+    assert is_candidate_match(report, incident) is True
+
+
+def test_session_issue_requires_matching_session_id():
+    incident = Incident(
+        id=204,
+        category="EXAMINATION",
+        subcategory="HALL_ALLOCATION",
+        location="Hall A",
+        started_at=datetime(2026, 8, 31, 10, 0),
+        status="IN_PROGRESS",
+        report_ids=[1],
+        session_id="EXAM-2026-08-31-AM",
+    )
+
+    same_session = Report(
+        id=2,
+        description="Wrong hall allocation",
+        category="EXAMINATION",
+        subcategory="HALL_ALLOCATION",
+        location="Hall A",
+        reported_at=datetime(2026, 8, 31, 10, 30),
+        reporter_id=102,
+        session_id="EXAM-2026-08-31-AM",
+    )
+
+    different_session = Report(
+        id=3,
+        description="Wrong hall allocation",
+        category="EXAMINATION",
+        subcategory="HALL_ALLOCATION",
+        location="Hall A",
+        reported_at=datetime(2026, 8, 31, 15, 0),
+        reporter_id=103,
+        session_id="EXAM-2026-08-31-PM",
+    )
+
+    missing_session = Report(
+        id=4,
+        description="Wrong hall allocation",
+        category="EXAMINATION",
+        subcategory="HALL_ALLOCATION",
+        location="Hall A",
+        reported_at=datetime(2026, 8, 31, 11, 0),
+        reporter_id=104,
+    )
+
+    assert is_candidate_match(same_session, incident) is True
+    assert is_candidate_match(different_session, incident) is False
+    assert is_candidate_match(missing_session, incident) is False
+
+
+def test_service_cycle_issue_requires_matching_service_cycle_id():
+    incident = Incident(
+        id=205,
+        category="SANITATION",
+        subcategory="CLEANING",
+        location="Washroom A",
+        started_at=datetime(2026, 8, 31, 10, 0),
+        status="IN_PROGRESS",
+        report_ids=[1],
+        service_cycle_id="CYCLE-100",
+    )
+
+    same_cycle = Report(
+        id=2,
+        description="Cleaning issue",
+        category="SANITATION",
+        subcategory="CLEANING",
+        location="Washroom A",
+        reported_at=datetime(2026, 8, 31, 10, 30),
+        reporter_id=102,
+        service_cycle_id="CYCLE-100",
+    )
+
+    different_cycle = Report(
+        id=3,
+        description="Cleaning issue",
+        category="SANITATION",
+        subcategory="CLEANING",
+        location="Washroom A",
+        reported_at=datetime(2026, 8, 31, 13, 0),
+        reporter_id=103,
+        service_cycle_id="CYCLE-101",
+    )
+
+    assert is_candidate_match(same_cycle, incident) is True
+    assert is_candidate_match(different_cycle, incident) is False

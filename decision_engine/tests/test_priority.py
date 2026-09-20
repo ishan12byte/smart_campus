@@ -62,3 +62,43 @@ def test_invalid_score():
         assert False
     except ValueError:
         assert True
+
+
+def test_priority_factors_have_stable_keys():
+    result = calculate_priority(
+        impact=1,
+        urgency=2,
+        safety=3,
+        deadline=4,
+        recurrence=5,
+    )
+
+    assert result["factors"] == {
+        "impact": 1,
+        "urgency": 2,
+        "safety": 3,
+        "deadline": 4,
+        "recurrence": 5,
+    }
+    assert "dealine" not in result["factors"]
+    assert result["emergency_override"] is False
+
+
+def test_emergency_priority_has_same_output_shape():
+    result = calculate_priority(
+        impact=1,
+        urgency=1,
+        safety=1,
+        deadline=1,
+        recurrence=1,
+        incident_type="FIRE",
+    )
+
+    assert result["factors"] == {
+        "impact": 1,
+        "urgency": 1,
+        "safety": 1,
+        "deadline": 1,
+        "recurrence": 1,
+    }
+    assert result["emergency_override"] is True

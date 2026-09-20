@@ -158,3 +158,28 @@ def test_verification_cannot_be_before_resolution():
             incident,
             datetime(2026, 8, 31, 11, 30),
         )
+
+def test_first_reopen_increments_reopened_count():
+    incident = create_test_incident()
+    start_incident(incident)
+    mark_resolved(incident, datetime(2026, 8, 31, 12, 0))
+
+    assert incident.reopened_count == 0
+
+    reopen_incident(incident)
+
+    assert incident.reopened_count == 1
+
+
+def test_second_reopen_increments_reopened_count_again():
+    incident = create_test_incident()
+    start_incident(incident)
+    mark_resolved(incident, datetime(2026, 8, 31, 12, 0))
+    reopen_incident(incident)
+
+    # Simulate the next resolution cycle.
+    start_incident(incident)
+    mark_resolved(incident, datetime(2026, 8, 31, 14, 0))
+    reopen_incident(incident)
+
+    assert incident.reopened_count == 2

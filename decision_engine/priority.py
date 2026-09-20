@@ -14,28 +14,34 @@ EMERGENCY_TYPES = {
     "CRITICAL_CYBER_INCIDENT",
 }
 
+
 def validate_score(value: int, name: str) -> None:
-    if not isinstance(value, int):
+    if type(value) is not int:
         raise TypeError(f"{name} must be an integer.")
 
     if value < 1 or value > 5:
         raise ValueError(f"{name} must be between 1 and 5.")
 
+
 def get_priority_level(score: float) -> str:
     if score >= 4.0:
         return "CRITICAL"
-    elif score >= 3.0:
+    if score >= 3.0:
         return "HIGH"
-    elif score >= 2.0:
+    if score >= 2.0:
         return "MEDIUM"
-    else:
-        return "LOW"
+    return "LOW"
+
 
 def is_emergency(incident_type: str | None) -> bool:
     if incident_type is None:
         return False
 
-    return incident_type.upper() in EMERGENCY_TYPES
+    if not isinstance(incident_type, str):
+        raise TypeError("incident_type must be a string or None.")
+
+    return incident_type.strip().upper() in EMERGENCY_TYPES
+
 
 def calculate_priority(
     impact: int,
@@ -45,18 +51,27 @@ def calculate_priority(
     recurrence: int,
     incident_type: str | None = None,
 ) -> dict:
-
     validate_score(impact, "impact")
     validate_score(urgency, "urgency")
     validate_score(safety, "safety")
     validate_score(deadline, "deadline")
     validate_score(recurrence, "recurrence")
 
+    factors = {
+        "impact": impact,
+        "urgency": urgency,
+        "safety": safety,
+        "deadline": deadline,
+        "recurrence": recurrence,
+    }
+
     if is_emergency(incident_type):
         return {
             "score": 5.0,
             "level": "CRITICAL",
-            "reason": "Emergency incident override",
+            "factors": factors,
+            "emergency_override": True,
+            "reason": "Emergency incident override.",
         }
 
     score = (
@@ -73,13 +88,8 @@ def calculate_priority(
     return {
         "score": score,
         "level": level,
-	"factors": {
-		"impact":impact,
-		"urgency":urgency,
-		"safety":safety,
-		"dealine":deadline,
-		"recurrence":recurrence,
-	},
+        "factors": factors,
+        "emergency_override": False,
         "reason": (
             "Calculated using impact, urgency, safety, "
             "deadline, and recurrence."

@@ -60,3 +60,32 @@ def test_pending_review():
     )
 
     assert result["status"] == "PENDING_REVIEW"
+
+def test_conflicting_responsibility_signals_require_human_review():
+    result = determine_responsibility(
+        category="MAINTENANCE",
+        user_caused=True,
+        infrastructure_failed=True,
+    )
+
+    assert result["status"] == "SHARED_RESPONSIBILITY"
+    assert result["confidence"] == 0.60
+
+
+def test_department_failure_and_resource_constraint_are_shared():
+    result = determine_responsibility(
+        category="SANITATION",
+        service_was_provided=False,
+        resource_constraint=True,
+    )
+
+    assert result["status"] == "SHARED_RESPONSIBILITY"
+
+
+def test_no_signal_with_evidence_stays_pending_review():
+    result = determine_responsibility(
+        category="IT",
+        evidence_available=True,
+    )
+
+    assert result["status"] == "PENDING_REVIEW"
