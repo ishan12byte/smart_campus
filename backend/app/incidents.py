@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -70,3 +70,39 @@ def get_incidents(
         )
 
     return incidents
+
+@router.get(
+    "/{incident_id}",
+    response_model=IncidentResponse
+)
+def get_incident(
+    incident_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    incident = (
+        db.query(Incident)
+        .filter(Incident.id == incident_id)
+        .first()
+    )
+
+    if not incident:
+        raise HTTPException(
+            status_code=404,
+            detail="Incident not found"
+        )
+
+    role = (
+        db.query(Role)
+        .filter(Role.id == current_user.role_id)
+        .first()
+    )
+
+    if role and role.name == "STUDENT":
+        if incident.reported_by != current_user.id:
+            raise HTTPException(
+                status_code=404,
+                detail="Incident not found"
+            )
+
+    return incident
