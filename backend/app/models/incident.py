@@ -14,6 +14,8 @@ class Incident(Base):
 
     category = Column(String, nullable=False)
 
+    subcategory = Column(String, nullable=True)
+
     location = Column(String, nullable=False)
 
     reported_by = Column(

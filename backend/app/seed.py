@@ -9,11 +9,11 @@ def seed_data():
     try:
         # Seed roles
         roles = [
-            "Student",
-            "Staff",
-            "Department Head",
-            "Super Admin"
-        ]
+        "STUDENT",
+        "STAFF",
+        "DEPARTMENT_HEAD",
+        "SUPER_ADMIN"
+    ]
 
         for role_name in roles:
             existing_role = db.query(Role).filter(
