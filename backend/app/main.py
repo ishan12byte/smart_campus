@@ -5,10 +5,13 @@ from app.models.role import Role
 from app.models.department import Department
 from app.models.user import User
 from app.models.incident import Incident
-from app.models.user import User
-from app.auth import router as auth_router
-from app.incidents import router as incidents_router
 
+
+from app.auth import router as auth_router
+from app.rbac import require_roles
+
+
+from app.routes.incidents import router as incidents_router
 
 app = FastAPI()
 
