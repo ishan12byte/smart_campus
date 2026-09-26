@@ -9,7 +9,11 @@ export async function apiRequest(endpoint, options={}){
         return data;
     }
     else{
-            throw new error(`Request failed with status ${response.status}`);
+        const errorData=await response.json()
+
+        throw new Error(
+            errorData.detail || `Request failed with status ${response.status}`
+        );
     }
      
 }
