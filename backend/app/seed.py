@@ -25,23 +25,24 @@ def seed_data():
 
         # Seed departments
         departments = [
-            "Examination",
-            "Academic Administration",
-            "Maintenance",
-            "Sanitation",
-            "IT",
-            "Security",
-            "Administration"
-        ]
+        ("EXAMINATION", "Examination"),
+        ("ACADEMIC_ADMIN", "Academic Administration"),
+        ("MAINTENANCE", "Maintenance"),
+        ("SANITATION", "Sanitation"),
+        ("IT", "Information Technology"),
+        ("SECURITY", "Security"),
+        ("ADMINISTRATION", "Administration")
+    ]
 
-        for department_name in departments:
+        for department_code, department_name in departments:
             existing_department = db.query(Department).filter(
-                Department.name == department_name
+                Department.code == department_code
             ).first()
 
             if not existing_department:
                 db.add(
                     Department(
+                        code=department_code,
                         name=department_name
                     )
                 )
