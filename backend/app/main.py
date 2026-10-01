@@ -17,7 +17,23 @@ from app.routes.roles import router as roles_router
 from app.routes.users import router as users_router
 from app.routes.admin import router as admin_router
 
-app = FastAPI()
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(title="Smart Campus API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 Base.metadata.create_all(bind=engine)
 
