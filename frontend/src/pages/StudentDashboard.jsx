@@ -1,5 +1,6 @@
+import { useNavigate } from "react-router-dom";
 function StudentDashboard() {
-
+    const navigate = useNavigate();
     return (
         <div>
 
@@ -34,7 +35,6 @@ function StudentDashboard() {
                 </div>
 
             </div>
-
 
             {/* Recent Reports */}
             <div>
@@ -100,7 +100,9 @@ function StudentDashboard() {
             <div>
                 <h2>Need to report a new issue?</h2>
                 <p>Submit an incident report to the campus operations team.</p>
-                <button>Report New Incident</button>
+                <button onClick={() => navigate("/report-incident")}>
+                    Report New Incident
+                </button>
             </div>
 
         </div>
