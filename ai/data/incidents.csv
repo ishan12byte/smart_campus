@@ -1,0 +1,21 @@
+﻿incident_id,description,category,subcategory,location,reported_at,session_id,service_cycle_id,source_type
+INC001,Projector displays a black screen after power-on.,IT,PROJECTOR,"Academic Block A, Room 204",2026-09-01T09:10:00,2026-FALL-MON-1,PROJ-R204-2026-09,synthetic
+INC002,"No image appears from the projector in Room 204, although the device is on.",IT,PROJECTOR,"Academic Block A, Room 204",2026-09-01T10:05:00,2026-FALL-MON-1,PROJ-R204-2026-09,synthetic
+INC003,Projector in Room 310 is not turning on.,IT,PROJECTOR,"Academic Block B, Room 310",2026-09-01T10:20:00,2026-FALL-MON-1,PROJ-R310-2026-09,synthetic
+INC004,Wi-Fi connection keeps dropping in the library reading area.,IT,NETWORK,"Central Library, Reading Area",2026-09-02T11:30:00,,NET-LIB-2026-09,synthetic
+INC005,Students cannot connect to the campus wireless network in the library.,IT,NETWORK,"Central Library, Reading Area",2026-09-02T12:00:00,,NET-LIB-2026-09,synthetic
+INC006,Water is leaking from the ceiling of the ground-floor washroom.,MAINTENANCE,PLUMBING,"Academic Block C, Ground-floor washroom",2026-09-03T08:45:00,,PLUMB-C-GF-2026-09,synthetic
+INC007,The washroom tap has no running water.,SANITATION,WATER_SANITATION,"Academic Block C, Ground-floor washroom",2026-09-03T09:00:00,,WATER-C-GF-2026-09,synthetic
+INC008,Waste bins in the cafeteria are overflowing.,SANITATION,WASTE,Cafeteria,2026-09-03T13:15:00,,CLEAN-CAF-2026-09-03,synthetic
+INC009,The cafeteria floor needs cleaning after lunch.,SANITATION,CLEANING,Cafeteria,2026-09-03T14:00:00,,CLEAN-CAF-2026-09-03,synthetic
+INC010,A classroom ceiling fan is making a loud rattling noise.,MAINTENANCE,ELECTRICAL,"Academic Block A, Room 112",2026-09-04T08:20:00,,FAN-A112-2026-09,synthetic
+INC011,The fan in Room 112 is vibrating and producing noise.,MAINTENANCE,ELECTRICAL,"Academic Block A, Room 112",2026-09-04T09:05:00,,FAN-A112-2026-09,synthetic
+INC012,Several lights are flickering in the corridor near Room 112.,MAINTENANCE,ELECTRICAL,"Academic Block A, Corridor 1",2026-09-04T09:30:00,,LIGHT-A-C1-2026-09,synthetic
+INC013,The scheduled instructor has not arrived for the first-period class.,ACADEMIC_ADMINISTRATION,NO_TEACHER_ASSIGNED,"Academic Block B, Room 205",2026-09-05T09:05:00,2026-FALL-SAT-1,,synthetic
+INC014,No substitute teacher was arranged for the class after the faculty member reported sick.,ACADEMIC_ADMINISTRATION,NO_SUBSTITUTE,"Academic Block B, Room 205",2026-09-05T09:20:00,2026-FALL-SAT-1,,synthetic
+INC015,Two examinations appear to be scheduled for the same student at overlapping times.,EXAMINATION,TIMETABLE_ISSUE,Examination Cell,2026-09-06T15:00:00,2026-EXAM-SEP,,synthetic
+INC016,My hall ticket lists an incorrect examination room.,EXAMINATION,HALL_ALLOCATION,Examination Cell,2026-09-06T15:30:00,2026-EXAM-SEP,,synthetic
+INC017,A suspicious person is attempting to enter a restricted laboratory.,SECURITY,UNAUTHORIZED_ACCESS,"Science Block, Laboratory 2",2026-09-07T12:10:00,,SEC-LAB2-2026-09,synthetic
+INC018,The laboratory door lock is damaged and does not latch securely.,MAINTENANCE,INFRASTRUCTURE_DAMAGE,"Science Block, Laboratory 2",2026-09-07T12:25:00,,LOCK-LAB2-2026-09,synthetic
+INC019,The computer in the accounts office will not boot.,IT,COMPUTER,"Administration Block, Accounts Office",2026-09-08T10:00:00,,PC-ACCOUNTS-2026-09,synthetic
+INC020,The accounts office printer is out of paper.,IT,OTHER_IT_ISSUE,"Administration Block, Accounts Office",2026-09-08T10:30:00,,PRINTER-ACCOUNTS-2026-09,synthetic

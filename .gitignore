@@ -1,0 +1,61 @@
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# Environment variables and secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# ML model caches and artifacts
+# ==========================================
+.cache/
+.cache/huggingface/
+.cache/torch/
+models/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+
+# ==========================================
+# Generated evaluation outputs
+# ==========================================
+ai/data/evaluation_results.csv
+ai/data/pair_analysis.csv
+
+# ==========================================
+# Logs and temporary files
+# ==========================================
+*.log
+*.tmp
+*.bak
+
+# ==========================================
+# IDE and operating system
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

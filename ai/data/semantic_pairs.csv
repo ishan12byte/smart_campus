@@ -1,0 +1,24 @@
+﻿incident_id_a,incident_id_b,match_label,match_type,reviewer_id,review_notes
+INC001,INC002,1,SAME_UNDERLYING_ISSUE,reviewer_demo,Same room and projector; descriptions indicate the same display failure.
+INC001,INC003,-1,INSUFFICIENT_EVIDENCE,reviewer_demo,Same equipment type but different rooms; no evidence of shared cause.
+INC004,INC005,1,SAME_UNDERLYING_ISSUE,reviewer_demo,Same library area and wireless connectivity issue.
+INC006,INC007,0,DIFFERENT_ISSUE,reviewer_demo,Leakage and lack of running water are distinct symptoms and may have different causes.
+INC008,INC009,-1,INSUFFICIENT_EVIDENCE,reviewer_demo,Same cafeteria service cycle but different sanitation tasks; need more context to determine linkage.
+INC010,INC011,1,SAME_UNDERLYING_ISSUE,reviewer_demo,"Same fan, room, and rattling/vibration symptom."
+INC010,INC012,0,DIFFERENT_ISSUE,reviewer_demo,Fan noise and corridor light flickering are separate reported faults.
+INC013,INC014,1,MEANINGFUL_CONTINUATION,reviewer_demo,Reports describe the same class session disruption and lack of substitute coverage.
+INC015,INC016,0,DIFFERENT_ISSUE,reviewer_demo,Overlapping exam times and incorrect hall allocation are different problems.
+INC017,INC018,-1,INSUFFICIENT_EVIDENCE,reviewer_demo,"Access attempt and damaged lock concern the same lab, but no causal connection is established."
+INC019,INC020,0,DIFFERENT_ISSUE,reviewer_demo,Computer boot failure and printer paper shortage are unrelated IT issues.
+INC001,INC004,0,DIFFERENT_ISSUE,reviewer_demo,"Different categories, locations, and underlying systems."
+INC003,INC012,0,DIFFERENT_ISSUE,reviewer_demo,Projector power issue and corridor lighting issue are distinct.
+INC006,INC008,0,DIFFERENT_ISSUE,reviewer_demo,Plumbing leakage and cafeteria waste overflow are unrelated.
+INC007,INC009,0,DIFFERENT_ISSUE,reviewer_demo,Water supply and floor cleaning are distinct service issues.
+INC013,INC015,0,DIFFERENT_ISSUE,reviewer_demo,Class instructor absence and exam timetable conflict are different.
+INC014,INC016,0,DIFFERENT_ISSUE,reviewer_demo,Substitute teacher availability and hall allocation are unrelated.
+INC017,INC019,0,DIFFERENT_ISSUE,reviewer_demo,Security access concern and office computer failure are unrelated.
+INC018,INC006,0,DIFFERENT_ISSUE,reviewer_demo,Damaged lab lock and washroom ceiling leak have different locations and issue types.
+INC004,INC010,0,DIFFERENT_ISSUE,reviewer_demo,Network instability and fan noise are unrelated.
+INC002,INC005,0,DIFFERENT_ISSUE,reviewer_demo,Projector failure and Wi-Fi connectivity failure are distinct despite both affecting classroom activity.
+INC008,INC007,0,DIFFERENT_ISSUE,reviewer_demo,Cafeteria waste overflow and washroom water outage are different concerns.
+INC011,INC012,0,DIFFERENT_ISSUE,reviewer_demo,Different equipment and locations.
