@@ -11,3 +11,11 @@ export async function createIncident(incidentData) {
 
     return data;
 }
+
+export async function getIncidents() {
+    const data = await apiRequest("/incidents", {
+        method: "GET"
+    });
+
+    return data;
+}

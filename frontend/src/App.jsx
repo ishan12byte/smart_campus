@@ -16,7 +16,7 @@ function App() {
         <Route path="/staff" element={<StaffDashboard/>}/>
         <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="/department" element={<DepartmentHeadDashboard/>}/>
-        <Route path="/report" element={<ReportIncident/>}/>
+        <Route path="/report-incident" element={<ReportIncident/>}/>
       </Routes>
     </BrowserRouter>
     )
