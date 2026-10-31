@@ -5,7 +5,7 @@ import StaffDashboard from './pages/StaffDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import DepartmentHeadDashboard from "./pages/DepartmentHeadDashboard";
 import ReportIncident from "./pages/ReportIncident"
-
+import MyIncidents from "./pages/MyIncidents";
 function App() {
 
   return (
@@ -17,6 +17,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="/department" element={<DepartmentHeadDashboard/>}/>
         <Route path="/report-incident" element={<ReportIncident/>}/>
+        <Route path="/my-incidents" element={<MyIncidents />} />      
       </Routes>
     </BrowserRouter>
     )
