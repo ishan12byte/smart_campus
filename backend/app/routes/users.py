@@ -1,9 +1,12 @@
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.user import User
 from app.schemas import UserResponse
+from app.rbac import require_roles
+
 
 router = APIRouter(
     prefix="/users",
@@ -12,14 +15,29 @@ router = APIRouter(
 
 
 @router.get("/", response_model=list[UserResponse])
-def get_users(db: Session = Depends(get_db)):
+def get_users(
+    current_user: User = Depends(
+        require_roles("SUPER_ADMIN")
+    ),
+    db: Session = Depends(get_db)
+):
     users = db.query(User).all()
     return users
 
 
 @router.get("/{user_id}", response_model=UserResponse)
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
+def get_user(
+    user_id: int,
+    current_user: User = Depends(
+        require_roles("SUPER_ADMIN")
+    ),
+    db: Session = Depends(get_db)
+):
+    user = (
+        db.query(User)
+        .filter(User.id == user_id)
+        .first()
+    )
 
     if not user:
         raise HTTPException(

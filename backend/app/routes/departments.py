@@ -9,7 +9,7 @@ from app.schemas import (
     DepartmentResponse
 )
 from app.auth import get_current_user
-
+from app.rbac import require_roles
 
 router = APIRouter(
     prefix="/departments",
@@ -63,7 +63,7 @@ def get_department(
 )
 def create_department(
     department_data: DepartmentCreate,
-    current_user=Depends(get_current_user),
+    current_user=Depends(require_roles("SUPER_ADMIN")),
     db: Session = Depends(get_db)
 ):
     existing_code = (
@@ -110,7 +110,7 @@ def create_department(
 def update_department(
     department_id: int,
     department_data: DepartmentUpdate,
-    current_user=Depends(get_current_user),
+    current_user=Depends(require_roles("SUPER_ADMIN")),
     db: Session = Depends(get_db)
 ):
     department = (

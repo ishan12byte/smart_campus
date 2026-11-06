@@ -5,27 +5,21 @@ from sqlalchemy import engine_from_config, pool
 
 from app.database import Base, DATABASE_URL
 
-# Import all models so Alembic can detect their tables
-from app.models.role import Role
-from app.models.department import Department
-from app.models.user import User
-from app.models.incident import Incident
+import app.models
 
-
-# Alembic Config object
 config = context.config
 
-# Use DATABASE_URL from .env
+
 config.set_main_option(
     "sqlalchemy.url",
     DATABASE_URL.replace("%", "%%")
 )
 
-# Configure logging
+
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# SQLAlchemy metadata
+
 target_metadata = Base.metadata
 
 

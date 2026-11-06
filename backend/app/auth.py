@@ -1,11 +1,16 @@
+from sqlalchemy.exc import IntegrityError
+
+from app.models.department import Department
+
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.user import User
+from app.models.role import Role
 from app.security import hash_password, verify_password
-from app.schemas import RegisterRequest, LoginRequest
+from app.schemas import RegisterRequest, LoginRequest, UserResponse
 
 from app.jwt_utils import create_access_token, decode_access_token
 
@@ -54,12 +59,17 @@ def get_current_user(
     return user
 
 
-@router.post("/register")
+
+@router.post(
+    "/register",
+    response_model=UserResponse,
+    status_code=201
+)
 def register(
     user_data: RegisterRequest,
     db: Session = Depends(get_db)
 ):
-    # Check whether email already exists
+    # 1. Check whether email already exists
     existing_user = (
         db.query(User)
         .filter(User.email == user_data.email)
@@ -72,26 +82,64 @@ def register(
             detail="Email already registered"
         )
 
-    # Hash the password before storing it
+    # Check whether department exists and is active
+    department = (
+        db.query(Department)
+        .filter(
+            Department.id == user_data.department_id,
+            Department.is_active.is_(True)
+        )
+        .first()
+    )
+
+    if not department:
+        raise HTTPException(
+            status_code=400,
+            detail="Department does not exist or is inactive"
+        )
+
+    # 2. Find the default STUDENT role
+    student_role = (
+        db.query(Role)
+        .filter(Role.name == "STUDENT")
+        .first()
+    )
+
+    if not student_role:
+        raise HTTPException(
+            status_code=500,
+            detail="Default registration role is not configured"
+        )
+
+    # 3. Hash the password
     hashed_password = hash_password(user_data.password)
 
-    # Create new user
+    # 4. Create the user with the default STUDENT role
     new_user = User(
         name=user_data.name,
         email=user_data.email,
         password_hash=hashed_password,
-        role_id=user_data.role_id,
+        role_id=student_role.id,
         department_id=user_data.department_id
     )
 
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
+    # 5. Save the user in the database
+    try:
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+        return new_user
 
-    return {
-        "message": "User registered successfully",
-        "user_id": new_user.id
-    }
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail="Email already registered or invalid registration data"
+        )
+
+    except Exception:
+        db.rollback()
+        raise
 
 
 @router.post("/login")
@@ -121,6 +169,13 @@ def login(
         raise HTTPException(
             status_code=401,
             detail="Invalid email or password"
+        )
+
+    # Reject inactive accounts
+    if not user.is_active:
+        raise HTTPException(
+            status_code=403,
+            detail="User account is inactive"
         )
 
     # Create JWT
