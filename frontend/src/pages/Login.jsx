@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
@@ -14,6 +13,43 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  // Extract the user's role from common API response structures.
+  const getUserRole = (response) => {
+    const user =
+      response?.user ||
+      response?.data?.user ||
+      response?.data ||
+      response;
+
+    return (
+      user?.role ||
+      user?.user_role ||
+      user?.userType ||
+      response?.role ||
+      ""
+    );
+  };
+
+  // Decide which dashboard to open based on the user's role.
+  const getDashboardRoute = (role) => {
+    const normalizedRole = String(role)
+      .trim()
+      .toLowerCase()
+      .replace(/[\s-]+/g, "_");
+
+    const roleRoutes = {
+      student: "/student",
+      staff: "/staff",
+      department: "/department",
+      department_head: "/department",
+      dept_head: "/department",
+      admin: "/admin",
+      super_admin: "/super-admin",
+    };
+
+    return roleRoutes[normalizedRole] || null;
+  };
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -28,14 +64,26 @@ function Login() {
     setLoading(true);
 
     try {
-      const user = await login(email, password);
+      const response = await login(email.trim(), password);
 
-      console.log("Authenticated user:", user);
-      setSuccess("Login successful. User profile loaded.");
+      const role = getUserRole(response);
+      const dashboardRoute = getDashboardRoute(role);
 
-      // Keep the existing navigation behaviour unchanged for now.
+      if (!dashboardRoute) {
+        setError(
+          "Login successful, but your account role could not be identified. Please contact your campus administrator."
+        );
+        return;
+      }
+
+      setSuccess("Login successful! Redirecting...");
+
+      navigate(dashboardRoute, { replace: true });
+
     } catch (error) {
-      setError(error.message || "Unable to log in. Please try again.");
+      setError(
+        error?.message || "Unable to log in. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -54,7 +102,9 @@ function Login() {
 
           <div className="campus-intro">
             <p className="campus-eyebrow">YOUR CAMPUS, CONNECTED</p>
+
             <h1>A better campus starts with you.</h1>
+
             <p className="campus-description">
               One place to report concerns, follow updates, and help
               make our campus a better place for everyone.
@@ -65,10 +115,12 @@ function Login() {
                 <span className="feature-mark">✓</span>
                 <span>Report campus issues easily</span>
               </div>
+
               <div className="campus-feature">
                 <span className="feature-mark">✓</span>
                 <span>Track your reports and updates</span>
               </div>
+
               <div className="campus-feature">
                 <span className="feature-mark">✓</span>
                 <span>Help build a safer campus</span>
@@ -110,6 +162,7 @@ function Login() {
 
             <div className="login-field">
               <label htmlFor="email">Email address</label>
+
               <input
                 id="email"
                 name="email"
@@ -119,6 +172,7 @@ function Login() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -127,6 +181,7 @@ function Login() {
                 <label htmlFor="password">Password</label>
                 <span className="password-hint">Keep it secure</span>
               </div>
+
               <input
                 id="password"
                 name="password"
@@ -136,6 +191,7 @@ function Login() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -144,8 +200,12 @@ function Login() {
                 <input
                   type="checkbox"
                   checked={rememberMe}
-                  onChange={(event) => setRememberMe(event.target.checked)}
+                  onChange={(event) =>
+                    setRememberMe(event.target.checked)
+                  }
+                  disabled={loading}
                 />
+
                 <span>Remember me</span>
               </label>
 
@@ -154,9 +214,16 @@ function Login() {
               </span>
             </div>
 
-            <button className="login-submit" type="submit" disabled={loading}>
+            <button
+              className="login-submit"
+              type="submit"
+              disabled={loading}
+            >
               {loading ? "Signing in..." : "Sign in"}
-              {!loading && <span aria-hidden="true">→</span>}
+
+              {!loading && (
+                <span aria-hidden="true">→</span>
+              )}
             </button>
 
             <p className="login-help">

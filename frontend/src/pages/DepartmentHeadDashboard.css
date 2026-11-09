@@ -1,0 +1,930 @@
+/* =========================================
+   DEPARTMENT HEAD DASHBOARD
+   SMART CAMPUS
+========================================= */
+
+.dh-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #f4f6fb;
+  color: #202b3c;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.dh-sidebar {
+  width: 265px;
+  min-width: 265px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 17px 18px;
+  background: #111d35;
+  color: #ffffff;
+}
+
+.dh-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dh-brand-mark {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #6979f8, #4655d9);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.dh-brand h1 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.dh-brand span {
+  color: #9ba9c2;
+  font-size: 11px;
+}
+
+.dh-role-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 24px 0 30px;
+  padding: 13px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.dh-role-avatar,
+.dh-topbar-avatar {
+  width: 37px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e5e9ff;
+  color: #4756d6;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dh-role-card strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dh-role-card span {
+  color: #aab6cb;
+  font-size: 10px;
+}
+
+.dh-nav-label {
+  margin: 0 0 12px 11px;
+  color: #7e8da8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.dh-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dh-nav-link {
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 12px;
+  border-radius: 9px;
+  color: #b5c0d3;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dh-nav-link:hover {
+  background: rgba(255, 255, 255, 0.075);
+  color: #ffffff;
+}
+
+.dh-nav-link.active {
+  background: #4858d9;
+  color: #ffffff;
+  box-shadow: 0 5px 14px rgba(39, 52, 154, 0.25);
+}
+
+.dh-nav-icon {
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 17px;
+}
+
+.dh-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding: 18px 10px 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ba9c2;
+  font-size: 10px;
+}
+
+.dh-footer-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.dh-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.dh-topbar {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px 35px;
+  border-bottom: 1px solid #e8ebf2;
+  background: #ffffff;
+}
+
+.dh-topbar-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #929db0;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.dh-topbar h2 {
+  margin: 0;
+  color: #1b2940;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.dh-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.dh-role-chip {
+  padding: 8px 12px;
+  border: 1px solid #e5e8f2;
+  border-radius: 20px;
+  background: #f8f9fd;
+  color: #65718a;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.dh-topbar-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.dh-page-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 35px 45px;
+}
+
+/* =========================================
+   PAGE INTRO
+========================================= */
+
+.dh-welcome-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.dh-eyebrow {
+  display: inline-block;
+  margin-bottom: 9px;
+  color: #6473dc;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.dh-welcome-section h2 {
+  margin: 0 0 8px;
+  color: #1c2940;
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+}
+
+.dh-welcome-section p {
+  max-width: 650px;
+  margin: 0;
+  color: #8791a3;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.dh-primary-button,
+.dh-outline-button,
+.dh-view-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.dh-primary-button {
+  min-height: 39px;
+  padding: 0 17px;
+  border: 1px solid #4b5bd9;
+  background: #4b5bd9;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+.dh-primary-button:hover {
+  background: #3949c8;
+}
+
+.dh-outline-button {
+  min-height: 37px;
+  padding: 0 13px;
+  border: 1px solid #dfe4f0;
+  background: #ffffff;
+  color: #58657c;
+  font-size: 11px;
+}
+
+.dh-outline-button:hover {
+  border-color: #6675e6;
+  color: #4b5bd9;
+}
+
+.dh-view-button {
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid #e0e5f0;
+  background: #ffffff;
+  color: #5364d8;
+  font-size: 10px;
+}
+
+.dh-view-button:hover {
+  border-color: #5364d8;
+  background: #f5f6ff;
+}
+
+/* =========================================
+   STATISTICS CARDS
+========================================= */
+
+.dh-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.dh-stats-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dh-stat-card {
+  min-width: 0;
+  padding: 19px 19px 17px;
+  border: 1px solid #e9ecf3;
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(25, 39, 70, 0.025);
+}
+
+.dh-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 15px;
+  color: #778297;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.dh-stat-card > strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e2b43;
+  font-size: 29px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dh-stat-card > small {
+  color: #9aa3b3;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.dh-stat-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.dh-stat-icon.purple {
+  background: #efedff;
+  color: #7764df;
+}
+
+.dh-stat-icon.blue {
+  background: #e8f2ff;
+  color: #4287d9;
+}
+
+.dh-stat-icon.orange {
+  background: #fff2e4;
+  color: #e79535;
+}
+
+.dh-stat-icon.green {
+  background: #e6f8ef;
+  color: #2ca66b;
+}
+
+.dh-stat-icon.red {
+  background: #ffebeb;
+  color: #df5555;
+}
+
+/* =========================================
+   PANELS
+========================================= */
+
+.dh-panel {
+  margin-top: 22px;
+  overflow: hidden;
+  border: 1px solid #e8ebf2;
+  border-radius: 13px;
+  background: #ffffff;
+  box-shadow: 0 3px 12px rgba(25, 39, 70, 0.025);
+}
+
+.dh-panel-heading {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 20px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.dh-panel-heading h3 {
+  margin: 0 0 6px;
+  color: #26334a;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.dh-panel-heading p {
+  margin: 0;
+  color: #98a1b0;
+  font-size: 10px;
+}
+
+.dh-count-pill {
+  min-width: 29px;
+  height: 27px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border-radius: 20px;
+  background: #eef0ff;
+  color: #5364d8;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.dh-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dh-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dh-table th {
+  padding: 13px 17px;
+  background: #fafbfe;
+  color: #8993a5;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.dh-table td {
+  padding: 15px 17px;
+  border-top: 1px solid #f0f2f6;
+  color: #657187;
+  font-size: 10px;
+}
+
+.dh-table tbody tr:hover {
+  background: #fbfcff;
+}
+
+.dh-incident-name {
+  margin-bottom: 5px;
+  color: #29364d;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.dh-secondary-text {
+  color: #a0a9b8;
+  font-size: 9px;
+}
+
+/* =========================================
+   STATUS AND PRIORITY BADGES
+========================================= */
+
+.dh-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.dh-badge-success {
+  background: #e8f8ef;
+  color: #25945d;
+}
+
+.dh-badge-warning {
+  background: #fff4e3;
+  color: #c8862c;
+}
+
+.dh-badge-danger {
+  background: #ffebeb;
+  color: #d94e4e;
+}
+
+.dh-badge-neutral {
+  background: #eff1f5;
+  color: #737e90;
+}
+
+/* =========================================
+   INFORMATION NOTICE
+========================================= */
+
+.dh-integration-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin: 0 0 20px;
+  padding: 14px 16px;
+  border: 1px solid #e5e9fb;
+  border-radius: 10px;
+  background: #f5f7ff;
+}
+
+.dh-notice-icon {
+  width: 21px;
+  height: 21px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e5e9ff;
+  color: #5868d8;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dh-integration-notice p {
+  margin: 1px 0 0;
+  color: #697590;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   FEATURE CARDS
+========================================= */
+
+.dh-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+  margin-top: 20px;
+}
+
+.dh-feature-card {
+  padding: 22px;
+  border: 1px solid #e8ebf2;
+  border-radius: 13px;
+  background: #ffffff;
+}
+
+.dh-feature-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  border-radius: 11px;
+  background: #eef0ff;
+  color: #5969d9;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.dh-feature-card h3 {
+  margin: 0 0 8px;
+  color: #26334a;
+  font-size: 13px;
+}
+
+.dh-feature-card p {
+  min-height: 42px;
+  margin: 0 0 15px;
+  color: #8993a5;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.dh-feature-status {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 20px;
+  background: #fff4e5;
+  color: #bd842f;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+/* =========================================
+   EMPTY AND LOADING STATES
+========================================= */
+
+.dh-empty-state,
+.dh-analytics-placeholder {
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.dh-empty-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  border-radius: 14px;
+  background: #f0f2ff;
+  color: #6573d9;
+  font-size: 22px;
+}
+
+.dh-empty-state h3,
+.dh-analytics-placeholder h3 {
+  margin: 0 0 8px;
+  color: #344158;
+  font-size: 13px;
+}
+
+.dh-empty-state p,
+.dh-analytics-placeholder p {
+  max-width: 430px;
+  margin: 0 auto;
+  color: #929bad;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.dh-loading {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  color: #8993a5;
+  font-size: 11px;
+}
+
+.dh-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #e5e8f5;
+  border-top-color: #5364d8;
+  border-radius: 50%;
+  animation: dh-spin 0.8s linear infinite;
+}
+
+@keyframes dh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dh-error-state {
+  max-width: 500px;
+  margin: 55px auto;
+  padding: 35px;
+  border: 1px solid #f0dede;
+  border-radius: 13px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.dh-error-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 13px;
+  border-radius: 50%;
+  background: #ffeded;
+  color: #d84d4d;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.dh-error-state h3 {
+  margin: 0 0 8px;
+  color: #344158;
+  font-size: 14px;
+}
+
+.dh-error-state p {
+  margin: 0 0 18px;
+  color: #929bad;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   INCIDENT DETAILS MODAL
+========================================= */
+
+.dh-modal-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(13, 23, 43, 0.55);
+}
+
+.dh-modal {
+  width: 100%;
+  max-width: 570px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+}
+
+.dh-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 23px 25px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.dh-modal-header h2 {
+  margin: 0;
+  color: #26334a;
+  font-size: 18px;
+}
+
+.dh-modal-close {
+  width: 31px;
+  height: 31px;
+  border: none;
+  border-radius: 8px;
+  background: #f0f2f7;
+  color: #68748a;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.dh-detail-list {
+  padding: 8px 25px;
+}
+
+.dh-detail-row {
+  display: grid;
+  grid-template-columns: 135px minmax(0, 1fr);
+  gap: 15px;
+  padding: 13px 0;
+  border-bottom: 1px solid #f0f2f6;
+  font-size: 11px;
+}
+
+.dh-detail-row span {
+  color: #929bad;
+}
+
+.dh-detail-row strong {
+  overflow-wrap: anywhere;
+  color: #354158;
+  font-weight: 650;
+}
+
+.dh-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 17px 25px 22px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1100px) {
+  .dh-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dh-stats-grid-three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dh-page-content {
+    padding-right: 23px;
+    padding-left: 23px;
+  }
+}
+
+@media (max-width: 760px) {
+  .dh-layout {
+    display: block;
+  }
+
+  .dh-sidebar {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .dh-brand {
+    padding-bottom: 15px;
+  }
+
+  .dh-role-card {
+    margin: 14px 0;
+  }
+
+  .dh-navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dh-nav-link {
+    min-height: 40px;
+    padding: 0 9px;
+    font-size: 10px;
+  }
+
+  .dh-sidebar-footer {
+    display: none;
+  }
+
+  .dh-topbar {
+    min-height: 70px;
+    padding: 13px 17px;
+  }
+
+  .dh-topbar h2 {
+    font-size: 16px;
+  }
+
+  .dh-role-chip {
+    display: none;
+  }
+
+  .dh-page-content {
+    padding: 22px 15px 35px;
+  }
+
+  .dh-welcome-section {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dh-welcome-section h2 {
+    font-size: 21px;
+  }
+
+  .dh-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dh-stats-grid,
+  .dh-stats-grid-three {
+    grid-template-columns: 1fr;
+  }
+
+  .dh-navigation {
+    grid-template-columns: 1fr;
+  }
+
+  .dh-topbar-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .dh-detail-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .dh-modal-header,
+  .dh-detail-list,
+  .dh-modal-footer {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+}
